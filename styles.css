@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;700&display=swap');
+
+:root {
+    --cor-de-fundo: #1E1E1E;
+    --verde: #6FFF57;
+    --branco: #FFFFFF;
+    --botao-ativo: #3A375E;
+    --botao-inativo: rgba(58, 55, 94, 0.5);
+    --texto-fundo: rgba(58, 55, 94, 0.3);
+}
+
+/* --- RESET BÁSICO E ESTILO GLOBAL --- */
+* {
+    /* Caixa padrão: border-box facilita o controle de padding/margin */
+    box-sizing: border-box; 
+}
+
+body {
+    background-color: var(--cor-de-fundo);
+    color: var(--branco);
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: 400; /* Define um peso padrão para o corpo */
+    min-height: 100vh; /* Garante que o fundo cubra toda a tela */
+    margin: 0;
+}
+
+/* Garante que elementos focáveis se destaquem, crucial para acessibilidade */
+.botao:focus {
+    outline: 2px solid var(--verde); 
+    outline-offset: 2px;
+}
+
+/* --- LAYOUT PRINCIPAL --- */
+.conteudo-principal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    width: 90%; /* Ajuste para ter margens nas laterais em telas grandes */
+    margin: 0 auto;
+    padding: 20px 0; /* Adiciona um padding no topo/base */
+}
+
+.titulo-principal {
+    text-align: left;
+    width: 100%;
+    font-size: 2em; /* Uso de 'em' em vez de 'px' para melhor escalabilidade */
+    font-weight: 700;
+    margin-bottom: 20px; /* Adiciona espaço abaixo do título */
+}
+
+.titulo-principal span {
+    color: var(--verde);
+}
+
+/* --- BOTÕES (ABAS) --- */
+.botoes {
+    display: block;
+    width: 100%; /* Garante que os botões ocupem 100% no mobile */
+}
+
+.botao {
+    font-family: 'Chakra Petch', sans-serif;
+    background-color: var(--botao-inativo);
+    color: var(--branco);
+    display: flex;
+    justify-content: center;
+    padding: 1em;
+    font-size: 18px;
+    align-items: center;
+    width: 100%;
+    border: none; /* Simplificação, vamos usar border-bottom e box-shadow */
+    border-bottom: 4px solid var(--botao-ativo);
+    
+    /* Adiciona transição para a cor de fundo e a borda inferior */
+    transition: background-color 0.3s, border-bottom-color 0.3s; 
+    
+    /* Adicionado cursor: pointer para indicar interatividade */
+    cursor: pointer; 
+}
+
+/* Remove estilos de borda desnecessários, apenas a borda inferior é relevante */
+.botao:not(.ativo):hover {
+    background-color: rgba(58, 55, 94, 0.7); /* Pequeno destaque no hover */
+}
+
+.botao.ativo {
+    background-color: var(--botao-ativo);
+    border-bottom: 4px solid var(--verde);
+    /* Opcional: Adiciona uma pequena sombra para destacar a aba ativa */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); 
+}
+
+/* Estilos de canto para Mobile */
+.botao:first-child {
+    border-radius: 40px 40px 0 0;
+}
+
+/* --- CONTEÚDO DAS ABAS --- */
+.abas-textos {
+    background-color: var(--texto-fundo);
+    padding: 40px;
+    border-radius: 0 0 40px 40px;
+    width: 100%; /* Garante que o conteúdo ocupe toda a largura */
+}
+
+.aba-conteudo {
+    /* Melhoria de acessibilidade/visual: Use flex para gerenciar o display */
+    display: none; 
+}
+
+.aba-conteudo.ativo {
+    display: block; /* Ou display: flex, dependendo do conteúdo interno */
+}
+
+.aba-conteudo-titulo-principal {
+    font-size: 1.5em; /* Ajustado para 'em' */
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 0.5em;
+}
+
+.aba-conteudo-titulo-secundario {
+    text-align: center;
+    color: var(--verde);
+    text-transform: uppercase;
+    font-size: 1em;
+    margin-top: 0;
+    margin-bottom: 1.5em;
+}
+
+/* --- CONTADOR --- */
+.contador {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px; /* Espaçamento entre os dígitos */
+}
+
+.contador-digito {
+    padding: 10px 16px; /* Ajuste o padding para harmonizar */
+    text-align: center;
+    min-width: 100px;
+}
+
+.contador-digito-numero {
+    font-size: 5em; /* Uso de 'em' para escalabilidade */
+    font-weight: 700;
+    margin: 0;
+    line-height: 1; /* Garante que o número fique compacto */
+}
+
+.contador-digito-texto {
+    color: var(--verde);
+    font-size: 1em;
+    margin: 0;
+}
+
+
+/* --- MEDIA QUERY (Desktop/Tablet) --- */
+@media screen and (min-width: 768px) {
+    .botoes {
+        display: flex;
+    }
+
+    /* Otimização: Adicionei flex-grow para os botões terem o mesmo tamanho */
+    .botao {
+        flex-grow: 1;
+    }
+    
+    /* Cantos arredondados para Desktop */
+    .botao:first-child {
+        border-radius: 40px 0 0 0;
+    }
+
+    .botao:last-child {
+        border-radius: 0 40px 0 0;
+    }
+    
+    .titulo-principal {
+        font-size: 2.5em; /* Aumenta um pouco mais em telas maiores */
+    }
+}
